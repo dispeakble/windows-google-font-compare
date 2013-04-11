@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Better Google Web Fonts</title>
+<title>Compare "Microsoft Fonts" and "Google Web Font" Families</title>
 <link rel="stylesheet" media="screen" href="google-families.css" />
 
 <script> var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-518812-8"]);_gaq.push(["_trackPageview"]);(function(A){var C=A.createElement("script");C.async=true;C.src=("https:"==A.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var B=A.getElementsByTagName("script")[0];B.parentNode.insertBefore(C,B);})(document); </script>
@@ -10,28 +10,37 @@
 
 <body>
 <header>
-	<h1>Google Web Fonts Families</h1>
-	<h2>Because web designers want font families, not just fonts.</h2>
-	<div id="filters"></div>
+	<h1>Compare "Microsoft Fonts" and
+        <span class="googFontCount"></span> "Google Web Font" Families</h1>
+    <br/>
+    <br/>
 </header>
 
-<div id="fonts"></div>
+<div id="fontsComp" class="fonts"></div>
+<div id="fonts" class="fonts"></div>
 
 <script id="font-template" type="text/template">
-		<h3><a href='<%= extlink %>' target='_blank'><%= family %></a></h3>
-		<ul><% _.each(variants, function(v){
-			var text = v.replace(/regular/i, '400').replace(/bold/i, '700'),
-				isItalic = /italic/.test(text),
-				weight = text.replace(/ ?italic/, ''),
-				style = (weight !== '') ? 'font-weight:'+weight+';' : '';
-			style = (isItalic) ? style + 'font-style:italic;' : style;
-			%><li style="<%= style %>"><%= text %></li><%
-		}); %></ul>
+    <h3 style="font-family: <%- family %>;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>
+        abcdefghijklmnopqrstuvwxyz</h3>
 
+    <small><a href='<%= extlink %>' target='_blank'><%= family %></a>
+        <ul><% _.each(variants, function(v){
+            var text = v.replace(/regular/i, '400').replace(/bold/i, '700'),
+            isItalic = /italic/.test(text),
+            weight = text.replace(/ ?italic/, ''),
+            style = (weight !== '') ? 'font-weight:'+weight+';' : '';
+            style = (isItalic) ? style + 'font-style:italic;' : style;
+            %><li><%= text %></li><%
+            }); %></ul>
+    </small>
 </script>
 
-<footer>Another type-related service brought to you by <a href="http://somadesign.ca/">Soma Design</a>. <a href="http://somadesign.ca/2011/better-google-fonts/">Read the blog post</a> or <a href="https://github.com/mattwiebe/Better-Google-Fonts">fork the code</a>.</footer>
-<script src="jquery-1.8.3.min.js"></script>
-<script src="app.js"></script>
+<footer>Forked from <a href="https://github.com/mattwiebe/Better-Google-Fonts">mattwiebe/Better-Google-Fonts</a>.</footer>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+<script src="google-families.js"></script>
+
 </body>
 </html>

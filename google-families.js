@@ -1,5 +1,8 @@
 (function($){
 
+    if (!window.console) window.console = {};
+    if (!window.console.log) window.console.log = function () { };
+
 	// API URL with my own key. Please get your own if you want to use it.
 	var api = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDUvQY9qd14Zvq7FrNl5hFRGgQ5sj0tbhE&sort=style';
 	// Will hold the font data returned by the API for future filtering operations

@@ -4,8 +4,6 @@
 <meta charset="utf-8" />
 <title>Compare "Microsoft Fonts" and "Google Web Font" Families</title>
 <link rel="stylesheet" media="screen" href="google-families.css" />
-
-<script> var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-518812-8"]);_gaq.push(["_trackPageview"]);(function(A){var C=A.createElement("script");C.async=true;C.src=("https:"==A.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var B=A.getElementsByTagName("script")[0];B.parentNode.insertBefore(C,B);})(document); </script>
 </head>
 
 <body>
@@ -15,30 +13,29 @@
     <br/>
     <br/>
 </header>
-
-<div id="fontsComp" class="fonts"></div>
-<div id="fonts" class="fonts"></div>
+<div>
+    <button id="reset">Reset</button>
+</div>
+<div id="windows" class="fonts"></div>
+<div id="google" class="fonts"></div>
 
 <script id="font-template" type="text/template">
-    <h3 style="font-family: <%- family %>;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>
-        abcdefghijklmnopqrstuvwxyz</h3>
+    <span class="font_text_uppercase" style="font-size:40px; font-family: <%- family %>;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br/>
+    <span class="font_text_lowercase" style="font-size:40px; font-family: <%- family %>;">abcdefghijklmnopqrstuvwxyz</span>
 
-    <small><a href='<%= extlink %>' target='_blank'><%= family %></a>
-        <ul><% _.each(variants, function(v){
-            var text = v.replace(/regular/i, '400').replace(/bold/i, '700'),
-            isItalic = /italic/.test(text),
-            weight = text.replace(/ ?italic/, ''),
-            style = (weight !== '') ? 'font-weight:'+weight+';' : '';
-            style = (isItalic) ? style + 'font-style:italic;' : style;
-            %><li><%= text %></li><%
-            }); %></ul>
-    </small>
+    <div>
+        <small><a href='<%= extlink %>' target='_blank'><%= family %></a>
+            <ul><% _.each(variants, function(v){
+                var text = v.replace(/regular/i, '400').replace(/bold/i, '700'),
+                isItalic = /italic/.test(text),
+                weight = text.replace(/ ?italic/, ''),
+                style = (weight !== '') ? 'font-weight:'+weight+';' : '';
+                style = (isItalic) ? style + 'font-style:italic;' : style;
+                %><li><%= text %></li><%
+                }); %></ul>
+        </small>
+    </div>
 </script>
-
-<footer>
-    Forked from <a href="https://github.com/mattwiebe/Better-Google-Fonts">mattwiebe/Better-Google-Fonts</a>
-    <br/>For this at <a href="https://github.com/paultuckey/windows-google-font-compare">paultuckey/windows-google-font-compare</a>
-</footer>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>

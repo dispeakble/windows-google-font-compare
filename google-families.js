@@ -90,11 +90,11 @@
 		fontData = items;
 		fonts.reset(items);
 		fontsView.render();
-		$("#fonts").html(fontsView.el);
+		$("#google").html(fontsView.el);
 
         var winFontTemplate = _.template($("#font-template").html());
         for ( var i = 0; i < winFonts.length; i++) {
-            $('#fontsComp').append($('<div class="font">' + winFontTemplate({
+            $('#windows').append($('<div class="font">' + winFontTemplate({
                 extlink: '',
                 family: winFonts[i],
                 variants: []
@@ -103,12 +103,48 @@
 
     };
 
+	function compare(vendor, type){
+
+		$('#' + vendor).on('click', '.font_text_' + type, function (ev) {
+			var compare_to = '#' + (vendor === 'google' ? 'windows' : 'google');
+			$(compare_to + ' .font').hide();
+			var matches = [];
+			var this_uc_width = $(this).width();
+			var source_name = vendor + ' ' + $(this).parent().find('a').html();
+			$(compare_to + ' .font').each((i, el) => {
+				$(el).show();
+				var uc_width = $(el).find('.font_text_'  + type).width();
+				$(el).hide();
+				if(this_uc_width === uc_width){
+					$(el).show();
+					matches.push($(el).find('a').html());
+				}
+			});
+			console.log(source_name + ' matched ' + JSON.stringify(matches));
+		});
+
+	}
+
 	jQuery(document).ready(function() {
 		$.ajax(api, {
 			dataType: 'jsonp',
 			jsonpCallback: 'callback',
 			success: renderFonts
 		});
+
+		var types = ['uppercase', 'lowercase'];
+		var dir = ['google', 'windows'];
+
+		for(var d = 0; d<2; d++){
+			for(var t = 0; t<2; t++){
+				compare(dir[d], types[t])
+			}
+		}
+
+		$('#reset').on('click', function(){
+			$('.font').show();
+		})
+
 	});
 
 })(jQuery);

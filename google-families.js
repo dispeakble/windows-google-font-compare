@@ -103,9 +103,14 @@
 
     };
 
+	function between(x, min, max) {
+		return x >= min && x <= max;
+	}
+
 	function compare(vendor, type){
 
 		$('#' + vendor).on('click', '.font_text_' + type, function (ev) {
+			var error_margin = +$('#error_margin').val();
 			var compare_to = '#' + (vendor === 'google' ? 'windows' : 'google');
 			$(compare_to + ' .font').hide();
 			var matches = [];
@@ -115,7 +120,7 @@
 				$(el).show();
 				var uc_width = $(el).find('.font_text_'  + type).width();
 				$(el).hide();
-				if(this_uc_width === uc_width){
+				if(between(this_uc_width, uc_width - error_margin, uc_width + error_margin)){
 					$(el).show();
 					matches.push($(el).find('a').html());
 				}

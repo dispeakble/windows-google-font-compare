@@ -28,7 +28,7 @@
             "Verdana, Geneva, sans-serif"];
 
     var Font = Backbone.Model.extend({
-		extUrlRoot: 'http://www.google.com/webfonts/specimen/',
+		extUrlRoot: 'https://www.google.com/webfonts/specimen/',
 		// normalize our font data a bit
 		getFontData: function() {
 			var fontData = this.toJSON();
@@ -43,7 +43,7 @@
 	var FontView = Backbone.View.extend({
 		className: 'font',
 		template: template,
-		apiBase: 'http://fonts.googleapis.com/css?family=',
+		apiBase: 'https://fonts.googleapis.com/css?family=',
 		render: function() {
 			var fontData = this.model.getFontData();
             //console.log(fontData.variants);

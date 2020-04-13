@@ -99,6 +99,11 @@
                 family: winFonts[i],
                 variants: []
             })+ '</div>'));
+
+            $('.font').draggable({
+				revert: true,
+				helper:"clone"
+			})
         }
 
     };
@@ -110,6 +115,8 @@
 	function compare(vendor, type){
 
 		$('#' + vendor).on('click', '.font_text_' + type, function (ev) {
+			var container = $(this).parent();
+			container[0].scrollIntoView(true);
 			var error_margin = +$('#error_margin').val();
 			var compare_to = '#' + (vendor === 'google' ? 'windows' : 'google');
 			$(compare_to + ' .font').hide();
@@ -148,7 +155,14 @@
 
 		$('#reset').on('click', function(){
 			$('.font').show();
+		});
+
+		$('body').on('mouseenter', '.font', function(){
+			$('.overlap').hide();
+			$(this).find('.overlap').show();
 		})
+
+
 
 	});
 

@@ -34,6 +34,7 @@ ul {
 .font {
 	margin-bottom:2em;
 	vertical-align:top;
+	position: relative;
 }
 .font small {
     font-family: sans-serif;
@@ -47,6 +48,17 @@ li:after {
 }
 li:last-child:after {
 	content: '';
+}
+
+.overlap{
+	position: absolute;
+	right: 0;
+	padding: 19px;
+	background: grey;
+	color: white;
+	border-radius: 5px;
+	display:none;
+	cursor: pointer;
 }
 
 #google, #windows {

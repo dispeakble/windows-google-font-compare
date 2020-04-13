@@ -13,7 +13,39 @@
 	// Manually exclude these stupid fonts
 	var manualExcludes = ['Averia Libre', 'Averia Sans Libre', 'Averia Serif Libre'];
 
-    var winFonts = ["Arial, Helvetica, sans-serif",
+	/*
+"Arial",
+"'Arial Black'",
+"'Book Antiqua'",
+"Charcoal",
+"'Comic Sans MS'",
+"Courier",
+"'Courier New'",
+"Cursive",
+"Gadget",
+"Geneva",
+"Georgia",
+"Helvetica",
+"Impact",
+"'Lucida Console'",
+"'Lucida Grande'",
+"'Lucida Sans Unicode'",
+"Monaco",
+"'MS Sans Serif'",
+"'MS Serif'",
+"'New York'",
+"Palatino",
+"'Palatino Linotype'",
+"Tahoma",
+"Textile",
+"Times",
+"'Times New Roman'",
+"'Trebuchet MS'",
+"Verdana"
+
+	* */
+
+    /*var winFonts = ["Arial, Helvetica, sans-serif",
             "'Arial Black', Gadget, sans-serif",
             "'Comic Sans MS', Textile, cursive",
             "'Courier New', Courier, monospace",
@@ -25,7 +57,35 @@
             "Tahoma, Geneva, sans-serif",
             "'Times New Roman', Times, serif",
             "'Trebuchet MS', Helvetica, sans-serif",
-            "Verdana, Geneva, sans-serif"];
+            "Verdana, Geneva, sans-serif"];*/
+    var winFonts = ["Arial",
+		"'Arial Black'",
+		"'Book Antiqua'",
+		"Charcoal",
+		"'Comic Sans MS'",
+		"Courier",
+		"'Courier New'",
+		"Cursive",
+		"Gadget",
+		"Geneva",
+		"Georgia",
+		"Helvetica",
+		"Impact",
+		"'Lucida Console'",
+		"'Lucida Grande'",
+		"'Lucida Sans Unicode'",
+		"Monaco",
+		"'MS Sans Serif'",
+		"'MS Serif'",
+		"'New York'",
+		"Palatino",
+		"'Palatino Linotype'",
+		"Tahoma",
+		"Textile",
+		"Times",
+		"'Times New Roman'",
+		"'Trebuchet MS'",
+		"Verdana"];
 
     var Font = Backbone.Model.extend({
 		extUrlRoot: 'https://www.google.com/webfonts/specimen/',

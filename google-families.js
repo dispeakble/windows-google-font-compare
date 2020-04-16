@@ -150,7 +150,7 @@
                 item.variants.indexOf('italic') != -1 && item.variants.indexOf('700') != -1  ;
 		});
 
-		fontData = items;
+		fontData = data.items;
 		fonts.reset(items);
 		fontsView.render();
 		$("#google").html(fontsView.el);

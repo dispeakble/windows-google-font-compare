@@ -7,7 +7,7 @@
 	// Cached reference
 	var head = $("head");
 	// Minimum font variants to show a font
-	var minVariants = 2;
+	var minVariants = 1;
 	// Template for a single font
 	var template = _.template($("#font-template").html());
 	// Manually exclude these stupid fonts
@@ -146,7 +146,7 @@
 			return;
 
 		var items = _.filter(data.items, function(item){
-			return item.variants.length >= minVariants && manualExcludes.indexOf(item.family) == -1 &&
+			return manualExcludes.indexOf(item.family) === -1 &&
                 item.variants.indexOf('italic') != -1 && item.variants.indexOf('700') != -1  ;
 		});
 

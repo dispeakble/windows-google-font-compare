@@ -145,12 +145,13 @@
 		if ( data.kind !== "webfonts#webfontList" )
 			return;
 
-		var items = _.filter(data.items, function(item){
-			return manualExcludes.indexOf(item.family) === -1 &&
-                item.variants.indexOf('italic') != -1 && item.variants.indexOf('700') != -1  ;
-		});
+		/*var items = _.filter(data.items, function(item){
+			return item.variants.indexOf('italic') != -1 && item.variants.indexOf('700') != -1  ;
+		});*/
 
-		fontData = data.items;
+		var items = data.items;
+
+		fontData = items;
 		fonts.reset(items);
 		fontsView.render();
 		$("#google").html(fontsView.el);

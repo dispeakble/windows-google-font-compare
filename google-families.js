@@ -93,6 +93,9 @@
 		getFontData: function() {
 			var fontData = this.toJSON();
 			fontData.extlink = this.extUrlRoot + encodeURIComponent(fontData.family);
+			if(fontData.family.indexOf(' ') > -1){
+				fontData.family = "'" + fontData.family + "'";
+			}
 			fontData.variants = _.map(fontData.variants, function(val){
 				return val.replace(/italic$/, ' italic');
 			});

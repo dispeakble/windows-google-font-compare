@@ -88,7 +88,7 @@
 		"Verdana"];
 
     var Font = Backbone.Model.extend({
-		extUrlRoot: 'https://www.google.com/webfonts/specimen/',
+		extUrlRoot: 'https://fonts.google.com/specimen/',
 		// normalize our font data a bit
 		getFontData: function() {
 			var fontData = this.toJSON();
@@ -117,7 +117,7 @@
 			var fontData = this.model.toJSON(),
 				tail = fontData.family + ':' + fontData.variants.join(','), // '&text=' + fontData.family + 'Iitalic1234567890',
 				url = this.apiBase + tail;
-            console.log(url);
+            //console.log(url);
 			$('<link rel="stylesheet" href="'+url+'" >').appendTo(head);
 		}
 	});
@@ -149,7 +149,11 @@
 			return item.variants.indexOf('italic') != -1 && item.variants.indexOf('700') != -1  ;
 		});*/
 
-		var items = data.items;
+		var items = _.filter(data.items, function(item){
+			return item.subsets.indexOf($('#subset').val()) != -1  ;
+		});
+
+		//var items = data.items;
 
 		fontData = items;
 		fonts.reset(items);
@@ -217,6 +221,10 @@
 			}
 		}
 
+		$('.font_text_uppercase').on('mouseenter', function(evt){
+
+		})
+
 		$('#reset').on('click', function(){
 			$('.font').show();
 		});
@@ -224,6 +232,15 @@
 		$('body').on('mouseenter', '.font', function(){
 			$('.overlap').hide();
 			$(this).find('.overlap').show();
+		})
+
+		$('#subset').on('change', function(evt){
+			$('#google').empty();
+			$.ajax(api, {
+				dataType: 'jsonp',
+				jsonpCallback: 'callback',
+				success: renderFonts
+			});
 		})
 
 

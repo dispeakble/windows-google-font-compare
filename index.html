@@ -15,10 +15,37 @@
     <br/>
     <br/>
 </header>
-<div>
-    <label>Error margin: <input type="number" id="error_margin" value="0" /></label>
-    <button id="reset">Reset</button>
-</div>
+<table width="100%">
+    <tr>
+        <td>
+            <label>Error margin: <input type="number" id="error_margin" value="0" /></label>
+            <button id="reset">Reset</button>
+        </td>
+        <td>
+            <label><input type="checkbox" id="local_debug"> Local debug</label> |
+            <label>Contains Subsets:</label>
+                <select id="subset">
+                <option value="latin"  > Latin</option>
+                <option value="latin-ext" > Latin-ext</option>
+                <option value="greek" selected="selected" > Greek</option>
+                <option value="greek-ext" > greek-ext</option>
+                <option value="hebrew" > Hebrew</option>
+                <option value="cyrillic" > Cyrillic</option>
+                <option value="cyrillic-ext" > Cyrillic-ext</option>
+                <option value="chinese-simplified" > Chinese-simplified</option>
+                <option value="chinese-traditional" > Chinese-traditional</option>
+                <option value="chinese-hongkong" > Chinese-hongkong</option>
+                <option value="japanese" > Japanese</option>
+                <option value="korean" > Korean</option>
+                <option value="vietnamese" > Vietnamese</option>
+                <option value="thai" > Thai</option>
+                <option value="tamil" > Tamil</option>
+                <option value="devanagari" > Devanagari</option>
+            </select>
+        </td>
+    </tr>
+</table>
+
 <div id="windows" class="fonts"></div>
 <div id="google" class="fonts"></div>
 

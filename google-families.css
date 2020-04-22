@@ -6,7 +6,7 @@ body {
 	background-color:#eeeeee;
 	font:100%/1.5 sans-serif;
 	padding:0;
-	margin:0 2em;
+	margin:0;
 }
 
 h1 {
@@ -63,9 +63,13 @@ li:last-child:after {
 }
 
 #google, #windows {
-    width: 45%;
-    display: inline-block;
-    overflow: scroll;
     height: 500px;
-    padding: 20px;
+	overflow: auto;
+}
+
+.font_text_uppercase, .font_text_lowercase, .font_text_symbols{
+	white-space: nowrap;
+	clear:both;
+	overflow:auto;
+	display:inline-block;
 }

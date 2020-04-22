@@ -87,6 +87,20 @@
 		"'Trebuchet MS'",
 		"Verdana"];
 
+    var subset_characters = {
+    	'def':["ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,'],
+    	'japanese':["一九七二人入八力十下三千上口土夕大女子小山川五天中六円手文日月木水火犬王正出本右四左玉生田白目石立百年休先名字早気竹糸耳虫村男町花見貝赤足車学林空金雨青草音校森", "道番間雲園数新楽話遠電鳴歌算語読聞線親頭曜顔", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,'],
+    	'korean':["ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣ", "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣ", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,'],
+    	'greek':["ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ", "αβγδεζηθικλμνξοπρσςτυφχψω", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,'],
+    	'hebrew':["אבבּגדהוזחטיךךּככּלםמןנסעףפפּץצקרשׁשׂתתּ", "אבבּגדהוזחטיךךּככּלםמןנסעףפפּץצקרשׁשׂתתּ", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,'],
+    	'vietnamese':["AĂÂBCDĐEÊGHIKLMNOÔƠPQRSTUƯVXY", "aăâbcdđeêghiklmnoôơpqrstuưvxy", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,'],
+    	'cyrillic':["АБВГДЕЖꙂꙀИІКЛМНОПРСТОУФХѠЦЧШЩЪЪІЬѢꙖѤЮѪѬѦѨѮѰѲѴҀ", "абвгдеёжзийклмнопрстуфхцчшщъыьэюя", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,'],
+    	'chinese-simplified':["诶比西迪伊艾弗吉艾尺艾杰开艾勒艾马艾娜哦屁吉吾艾儿艾丝提伊吾维豆贝尔维艾克斯吾艾贼德", "诶比西迪伊艾弗吉艾尺艾杰开艾勒艾马艾娜哦屁吉吾艾儿艾丝提伊吾维豆贝尔维艾克斯吾艾贼德", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,'],
+    	'chinese-traditional':["電買車紅無東馬風愛時鳥島語頭魚園長紙書見響假佛德拜黑冰兔妒每壤步巢惠莓圓聽實證龍賣龜藝戰繩繪鐵圖團轉廣惡豐腦雜壓雞鷄總價樂歸氣廳發勞劍歲權燒贊兩譯觀營處齒驛櫻產藥讀顏畫聲學體點麥蟲舊會萬盜寶國醫雙晝觸來黃區", "abcdefghijklmnopqrstuvwxyz", '+_)(*&^%$#@!~}{|":?><=-098765432`][\\;/.,']
+	};
+
+    var current_font_text = [];
+
     var Font = Backbone.Model.extend({
 		extUrlRoot: 'https://fonts.google.com/specimen/',
 		// normalize our font data a bit
@@ -96,6 +110,8 @@
 			if(fontData.family.indexOf(' ') > -1){
 				fontData.family = "'" + fontData.family + "'";
 			}
+
+
 			fontData.variants = _.map(fontData.variants, function(val){
 				return val.replace(/italic$/, ' italic');
 			});
@@ -108,7 +124,14 @@
 		template: template,
 		apiBase: 'https://fonts.googleapis.com/css?family=',
 		render: function() {
+			var subset_value = $('#subset').val();
+			if(subset_characters.hasOwnProperty(subset_value)){
+				current_font_text = subset_characters[subset_value];
+			} else {
+				current_font_text = subset_characters['def'];
+			}
 			var fontData = this.model.getFontData();
+			fontData.text = current_font_text;
             //console.log(fontData.variants);
             this.getFont();
             this.$el.html(this.template(fontData));
@@ -130,6 +153,7 @@
 	var FontsView = Backbone.View.extend({
 		collection: fonts,
 		render: function() {
+			this.$el.empty();
 			$(".googFontCount").text(this.collection.length);
 			this.collection.forEach(this.addOne, this);
 		},
@@ -161,9 +185,16 @@
 		$("#google").html(fontsView.el);
 
         var winFontTemplate = _.template($("#font-template").html());
+		var subset_value = $('#subset').val();
+		if(subset_characters.hasOwnProperty(subset_value)){
+			current_font_text = subset_characters[subset_value];
+		} else {
+			current_font_text = subset_characters['def'];
+		}
         for ( var i = 0; i < winFonts.length; i++) {
             $('#windows').append($('<div class="font">' + winFontTemplate({
                 extlink: '',
+				text:current_font_text,
                 family: winFonts[i],
                 variants: []
             })+ '</div>'));
@@ -221,10 +252,6 @@
 			}
 		}
 
-		$('.font_text_uppercase').on('mouseenter', function(evt){
-
-		})
-
 		$('#reset').on('click', function(){
 			$('.font').show();
 		});
@@ -236,6 +263,7 @@
 
 		$('#subset').on('change', function(evt){
 			$('#google').empty();
+			$('#windows').empty();
 			$.ajax(api, {
 				dataType: 'jsonp',
 				jsonpCallback: 'callback',

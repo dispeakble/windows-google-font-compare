@@ -45,15 +45,17 @@
         </td>
     </tr>
 </table>
+<div style="display: grid; grid-template-columns: 50% 50%; grid-template-rows: auto;">
+    <div id="windows" class="fonts"></div><div id="google" class="fonts"></div>
+</div>
 
-<div id="windows" class="fonts"></div>
-<div id="google" class="fonts"></div>
 
 <script id="font-template" type="text/template">
-    <span class="font_text_uppercase" style="font-size:40px; font-family: <%- family %>;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br/>
-    <span class="font_text_lowercase" style="font-size:40px; font-family: <%- family %>;">abcdefghijklmnopqrstuvwxyz</span>
-    <a class="overlap">overlap</a>
-    <div>
+    <span class="font_text_uppercase" style="font-size:40px; font-family: <%- family %>;"><%- text[0] %></span><br/>
+    <span class="font_text_lowercase" style="font-size:40px; font-family: <%- family %>;"><%- text[1] %></span><br/>
+    <span class="font_text_symbols" style="font-size:40px; font-family: <%- family %>;"><%- text[2] %></span>
+    <a class="overlap">drag me</a>
+    <div style="width:100%; overflow: auto">
         <small><a href='<%= extlink %>' target='_blank'><%= family %></a>
             <ul><% _.each(variants, function(v){
                 var text = v.replace(/regular/i, '400').replace(/bold/i, '700'),
